@@ -11,10 +11,14 @@ import {
 } from "react-native";
 
 const ProductCard = ({
-  title = "Toilettas Takkie canvas stof beige",
-  description = "Deze handige toilettas is perfect voor kinderen die gaan logeren. Gemaakt van stevig canvas, met het leuke dessin van Takkie, biedt deze tas genoeg ruimte voor al je spulletjes. Neem je toilettas gemakkelijk mee in jouw bagage en maak je uitjes zorgeloos!",
-  price = 4.99,
-  image = require("../images/tasje-takkie.png"),
+  id,
+  title,
+  description,
+  longDescription,
+  price,
+  image,
+  onToggleFavorite,
+  isFavorite,
 }) => {
   const [subscribed, setSubscribed] = useState(false);
   const navigation = useNavigation();
@@ -24,19 +28,23 @@ const ProductCard = ({
       <Image source={image} style={styles.image} />
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
-      <Text style={styles.description}>${price}</Text>
+      {/* <Text style={styles.description}>{longDescription}</Text> */}
+      <Text style={styles.price}>${price}</Text>
 
-      <Text style={styles.label}>Amount</Text>
+      {/* <Text style={styles.label}>Amount</Text>
       <TextInput
         style={styles.input}
         placeholder="Enter quantity"
         keyboardType="numeric"
-      />
+      /> */}
 
-      <View style={styles.switchContainer}>
+      {/* <View style={styles.switchContainer}>
         <Text style={styles.switchLabel}>Auto-Refill Subscription</Text>
         <Switch value={subscribed} onValueChange={setSubscribed} />
-      </View>
+      </View> */}
+      <Pressable style={styles.heart} onPress={() => onToggleFavorite(id)}>
+        <Text>{isFavorite ? "❤️" : "🤍"}</Text>
+      </Pressable>
 
       <Pressable
         style={styles.button}
@@ -44,12 +52,13 @@ const ProductCard = ({
           navigation.navigate("Details", {
             title,
             description,
+            longDescription,
             price,
             image,
           })
         }
       >
-        <Text style={styles.buttonText}>Look at product</Text>
+        <Text style={styles.buttonText}>Bekijk product</Text>
       </Pressable>
     </View>
   );
@@ -78,6 +87,14 @@ const styles = StyleSheet.create({
     color: "#555",
     marginTop: 4,
   },
+
+  price: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#000000",
+    marginTop: 4,
+  },
+
   label: {
     marginTop: 8,
     fontSize: 14,
@@ -100,15 +117,21 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   button: {
-    backgroundColor: "#007AFF",
+    backgroundColor: "#CFD8EE",
     paddingVertical: 10,
     borderRadius: 6,
     alignItems: "center",
     marginTop: 12,
   },
   buttonText: {
-    color: "#fff",
+    color: "#000000",
     fontWeight: "bold",
+  },
+  heart: {
+    position: "absolute",
+    top: 8,
+    right: 8,
+    zIndex: 1,
   },
 });
 

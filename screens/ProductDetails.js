@@ -13,12 +13,8 @@ import { useState } from "react";
 const ProductDetail = () => {
   const route = useRoute();
 
-  const {
-    title = "Toilettas Takkie canvas stof beige",
-    description = "eze handige toilettas is perfect voor kinderen die gaan logeren. Gemaakt van stevig canvas, met het leuke dessin van Takkie, biedt deze tas genoeg ruimte voor al je spulletjes. Neem je toilettas gemakkelijk mee in jouw bagage en maak je uitjes zorgeloos!",
-    price = 4.99,
-    image = require("../images/tasje-takkie.png"),
-  } = route.params || {};
+  const { title, description, longDescription, price, image } =
+    route.params || {};
 
   const [quantity, setQuantity] = useState(1);
 
@@ -30,7 +26,7 @@ const ProductDetail = () => {
 
       <Text style={styles.productTitle}>{title}</Text>
       <Text style={styles.price}>${(price * quantity).toFixed(2)}</Text>
-      <Text style={styles.description}>{description}</Text>
+      <Text style={styles.description}>{longDescription}</Text>
 
       <View style={styles.quantityContainer}>
         <TouchableOpacity
@@ -66,8 +62,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   image: {
-    width: 300,
-    height: 200,
+    width: 400,
+    height: 400,
     borderRadius: 10,
     marginBottom: 20,
   },
@@ -81,7 +77,7 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 18,
-    color: "#007AFF",
+    color: "#000000",
     marginVertical: 10,
   },
   quantityContainer: {
@@ -90,12 +86,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: "#007AFF",
+    backgroundColor: "#CFD8EE",
     padding: 10,
     borderRadius: 5,
   },
   buttonText: {
-    color: "#fff",
+    color: "#000000",
     fontWeight: "bold",
   },
   quantity: {
