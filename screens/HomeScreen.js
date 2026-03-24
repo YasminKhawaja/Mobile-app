@@ -150,6 +150,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import ProductCard from "../components/ProductCard";
+import BlogCard from "../components/BlogCard";
 
 const HomeScreen = ({ navigation }) => {
   const [showFavorites, setShowFavorites] = useState(false);
@@ -191,6 +192,27 @@ const HomeScreen = ({ navigation }) => {
         "Set van twee toilettasjes als vrolijke cadeauset. Het kleine blauwe tasje heeft geborduurde roze hartjes, het grotere tasje een lichtblauw-wit streepje. Beide sluiten met een rits. Handig voor je cosmetica, sieraden of losse spullen in je tas of koffer.",
       price: 6.99,
       image: require("../images/toilettasje1.png"),
+    },
+  ];
+
+  const blogs = [
+    {
+      id: "1",
+      title: "Duurzaam reizen begint bij je koffer",
+      description:
+        "Duurzaam reizen gaat niet alleen over vervoer. Het begint bij wat je meeneemt.",
+      longDescription:
+        "Kleine keuzes maken een groot verschil. Duurzaam reizen begint niet op je bestemming, maar bij wat je meeneemt. Met de juiste accessoires verminder je afval, bespaar je ruimte en reis je bewuster. Waarom duurzame reisaccessoires belangrijk zijn. Duurzame reisaccessoires helpen om afval te verminderen en langer met je spullen te doen. In plaats van goedkope producten die snel kapot gaan, kies je voor kwaliteit die meerdere reizen meegaat. Dat is beter voor het milieu én voordeliger op lange termijn. Kleine keuzes in je koffer maken uiteindelijk een groot verschil.",
+      image: require("../images/valies.png"),
+    },
+    {
+      id: "2",
+      title: "Waarom goed voorbereid reizen je vakantie beter maakt",
+      description:
+        "Waarom een goede voorbereiding zorgt voor minder stress en meer reisplezier.",
+      longDescription:
+        "Een geslaagde reis begint niet op je bestemming, maar thuis. Goede voorbereiding zorgt ervoor dat je minder stress ervaart en meer kunt genieten van het moment. Toch onderschatten veel reizigers hoe belangrijk planning is. Voorbereiding geeft rust. Wanneer je documenten, accommodaties en vervoer op tijd controleert, vertrek je met meer zekerheid. Onzekerheid veroorzaakt stress, en stress haalt plezier weg uit je reis. Een vaste reisroutine. Door een vaste voorbereiding te volgen — checklist maken, spullen klaarleggen, documenten bundelen — bouw je routine op. Dat maakt elke volgende reis eenvoudiger. Minder impulsieve keuzes. Wie goed voorbereid vertrekt, geeft minder geld uit aan last-minute aankopen op luchthavens of toeristische plekken. Conclusie: voorbereiding is geen tijdverlies. Het is een investering in een ontspannen reiservaring.",
+      image: require("../images/blog7.jpg"),
     },
   ];
 
@@ -239,6 +261,23 @@ const HomeScreen = ({ navigation }) => {
               />
             </View>
           ))}
+
+        <View style={{ marginTop: 20 }}>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              marginBottom: 10,
+              paddingLeft: 10,
+            }}
+          >
+            Blogs
+          </Text>
+
+          {blogs.map((blog) => (
+            <BlogCard key={blog.id} {...blog} />
+          ))}
+        </View>
       </View>
 
       <StatusBar style="auto" />
