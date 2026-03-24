@@ -11,10 +11,10 @@ import {
 } from "react-native";
 
 const ProductCard = ({
-  title = "Automatic Litterbox",
-  description = "Keeps your home clean and odor-free.",
-  price = 199.99,
-  image = require("../assets/smart_litterbox.png"),
+  title = "Toilettas Takkie canvas stof beige",
+  description = "Deze handige toilettas is perfect voor kinderen die gaan logeren. Gemaakt van stevig canvas, met het leuke dessin van Takkie, biedt deze tas genoeg ruimte voor al je spulletjes. Neem je toilettas gemakkelijk mee in jouw bagage en maak je uitjes zorgeloos!",
+  price = 4.99,
+  image = require("../images/tasje-takkie.png"),
 }) => {
   const [subscribed, setSubscribed] = useState(false);
   const navigation = useNavigation();
