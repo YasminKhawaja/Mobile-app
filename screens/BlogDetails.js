@@ -1,15 +1,25 @@
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 import { useRoute } from "@react-navigation/native";
+import RenderHTML from "react-native-render-html";
 
 const BlogDetail = () => {
   const route = useRoute();
 
   const {
     title = "Blog titel",
-    description = "Korte beschrijving",
-    longDescription = "Lange tekst van de blog...",
-    image = require("../images/valies.png"),
+    summary = "Korte beschrijving",
+    body = "<p>Geen inhoud</p>",
+    image = { uri: "https://via.placeholder.com/150" },
   } = route.params || {};
+
+  const { width } = Dimensions.get("window");
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -17,9 +27,15 @@ const BlogDetail = () => {
 
       <Text style={styles.title}>{title}</Text>
 
-      <Text style={styles.description}>{description}</Text>
+      {/* korte tekst */}
+      <Text style={styles.description}>{summary}</Text>
 
-      <Text style={styles.longText}>{longDescription}</Text>
+      {/* 🔥 HTML content */}
+      {body ? (
+        <RenderHTML contentWidth={width} source={{ html: body }} />
+      ) : (
+        <Text>Geen inhoud beschikbaar</Text>
+      )}
     </ScrollView>
   );
 };
@@ -44,10 +60,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#666",
     marginBottom: 10,
-  },
-  longText: {
-    fontSize: 16,
-    lineHeight: 22,
   },
 });
 
