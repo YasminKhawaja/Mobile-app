@@ -213,8 +213,7 @@ const HomeScreen = () => {
       "https://api.webflow.com/v2/sites/698c7fe7e8e32548bbc37c57/products",
       {
         headers: {
-          Authorization:
-            "Bearer 7da7e50785c2443b9c7dabfd811b032cfee745714bdfdb7ca9afb66592ebbe90",
+          Authorization: `Bearer ${process.env.EXPO_PUBLIC_API_KEY}`,
         },
       },
     )
@@ -232,8 +231,7 @@ const HomeScreen = () => {
       "https://api.webflow.com/v2/collections/699ef930deecdcddb29496d7/items",
       {
         headers: {
-          Authorization:
-            "Bearer 7da7e50785c2443b9c7dabfd811b032cfee745714bdfdb7ca9afb66592ebbe90",
+          Authorization: `Bearer ${process.env.EXPO_PUBLIC_API_KEY}`,
         },
       },
     )
