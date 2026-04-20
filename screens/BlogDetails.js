@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   Dimensions,
+  Button,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import RenderHTML from "react-native-render-html";

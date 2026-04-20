@@ -145,12 +145,11 @@ const ProductCard = ({
   id,
   title,
   description,
-  longDescription,
   price,
   image,
   isFavorite,
   onToggleFavorite,
-  showDescription = true, // 👈 BELANGRIJK
+  showDescription = true, // BELANGRIJK
 }) => {
   const navigation = useNavigation();
 
@@ -158,14 +157,14 @@ const ProductCard = ({
     <View style={styles.card}>
       <Image source={image} style={styles.image} />
 
-      {/* ❤️ Favoriet */}
+      {/* Favoriet */}
       <Pressable style={styles.heart} onPress={() => onToggleFavorite(id)}>
         <Text style={{ fontSize: 18 }}>{isFavorite ? "❤️" : "🤍"}</Text>
       </Pressable>
 
       <Text style={styles.title}>{title}</Text>
 
-      {/* 👇 ALLEEN tonen als showDescription = true */}
+      {/* ALLEEN tonen als showDescription = true */}
       {showDescription && <Text style={styles.description}>{description}</Text>}
 
       <Text style={styles.price}>${price}</Text>
@@ -176,7 +175,6 @@ const ProductCard = ({
           navigation.navigate("Details", {
             title,
             description,
-            longDescription,
             price,
             image,
           })

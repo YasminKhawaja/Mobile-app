@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   Switch,
+  Button,
 } from "react-native";
 import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
@@ -44,8 +45,28 @@ const HomeScreen = () => {
         console.log("PRODUCTS:", data);
         setProducts(data.items || []);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setError("Producten laden mislukt");
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.loading}>
+        <Text>Loading producten...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.loading}>
+        <Text>{error}</Text>
+      </View>
+    );
+  }
 
   // BLOGS API
   useEffect(() => {
@@ -73,6 +94,7 @@ const HomeScreen = () => {
       return {
         id: product.id,
         title: product.fieldData?.name || "",
+        description: product.fieldData?.description || "",
         price: sku?.fieldData?.price?.value
           ? sku.fieldData.price.value / 100
           : 0,
@@ -83,19 +105,6 @@ const HomeScreen = () => {
       };
     });
   }, [products]);
-
-  // const filteredProducts = formattedProducts.filter((p) => {
-  //   const title = p.title?.toLowerCase() || "";
-  //   const category = p.category?.toLowerCase() || "";
-  //   const query = searchQuery.toLowerCase().trim();
-
-  //   const matchSearch = title.includes(query) || category.includes(query);
-
-  //   const matchCategory =
-  //     selectedCategory === "" || p.category === selectedCategory;
-
-  //   return matchSearch && matchCategory;
-  // });
 
   const filteredProducts = formattedProducts.filter((p) => {
     const title = p.title?.toLowerCase() || "";
@@ -124,6 +133,9 @@ const HomeScreen = () => {
         return 0;
     }
   });
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // loading (voorkomt crash)
   if (products.length === 0) {
@@ -196,32 +208,6 @@ const HomeScreen = () => {
         </Text>
       )}
 
-      {/* <View style={styles.grid}>
-        {filteredProducts
-          .filter((product) =>
-            showFavorites ? favorites.includes(product.id) : true,
-          )
-          .map((product) => (
-            <View style={styles.card} key={product.id}>
-              <ProductCard
-                id={product.id}
-                title={product.title}
-                price={product.price}
-                image={product.image}
-                showDescription={false}
-                isFavorite={favorites.includes(product.id)}
-                onToggleFavorite={(id) => {
-                  setFavorites((prev) =>
-                    prev.includes(id)
-                      ? prev.filter((fav) => fav !== id)
-                      : [...prev, id],
-                  );
-                }}
-              />
-            </View>
-          ))}
-      </View> */}
-
       <View style={styles.grid}>
         {sortedProducts
           .filter((product) =>
@@ -232,6 +218,7 @@ const HomeScreen = () => {
               <ProductCard
                 id={product.id}
                 title={product.title}
+                description={product.description}
                 price={product.price}
                 image={product.image}
                 showDescription={false}

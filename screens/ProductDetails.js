@@ -6,16 +6,14 @@ import {
   View,
   Image,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
 
 const ProductDetail = () => {
   const route = useRoute();
-
-  const { title, description, longDescription, price, image } =
-    route.params || {};
-
+  const { title, description, price, image } = route.params || {};
   const [quantity, setQuantity] = useState(1);
 
   return (
@@ -26,7 +24,7 @@ const ProductDetail = () => {
 
       <Text style={styles.productTitle}>{title}</Text>
       <Text style={styles.price}>${(price * quantity).toFixed(2)}</Text>
-      <Text style={styles.description}>{longDescription}</Text>
+      <Text style={styles.description}>{description}</Text>
 
       <View style={styles.quantityContainer}>
         <TouchableOpacity
@@ -45,6 +43,12 @@ const ProductDetail = () => {
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
       </View>
+
+      <Button
+        title="Reset aantal"
+        color="#27438c"
+        onPress={() => setQuantity(1)}
+      />
 
       <StatusBar style="auto" />
     </ScrollView>
